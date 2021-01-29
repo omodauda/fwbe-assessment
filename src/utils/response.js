@@ -27,7 +27,6 @@ const successResponse = (res, {condition, condition_value}, field, fieldValue) =
 };
 
 const errorResponse = (res, {condition, condition_value}, field, fieldValue) => {
-  // console.log('i was called')
   return res
   .status(400)
   .json({

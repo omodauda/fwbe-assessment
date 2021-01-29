@@ -38,12 +38,21 @@ const validationUrl = (req, res) => {
       data[split[0]] !== condition_value ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "gt"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value > data[split[0]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     }
     if(condition === "gte"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value >= data[split[0]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     }
     if(condition === "contains"){
+      if(!Array.isArray(fieldValue)){
+        return errorResponse(res, rule, field, fieldValue);
+      }
       data[split[0]].includes(condition_value) ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     }
   };
@@ -57,12 +66,21 @@ const validationUrl = (req, res) => {
       data[split[0]][split[1]] !== condition_value ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "gt"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value > data[split[0]][split[1]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "gte"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value >= data[split[0]][split[1]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "contains"){
+      if(!Array.isArray(fieldValue)){
+        return errorResponse(res, rule, field, fieldValue);
+      }
       data[split[0]][split[1]].includes(condition_value) ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
   };
@@ -76,12 +94,21 @@ const validationUrl = (req, res) => {
       data[split[0]][split[1]][split[2]] !== condition_value ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "gt"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value > data[split[0]][split[1]][split[2]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "gte"){
+      if(typeof(condition_value) !== typeof(data[split[0]])){
+        return errorResponse(res, rule, field, fieldValue)
+      }
       condition_value >= data[split[0]][split[1]][split[2]] ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
     if(condition === "contains"){
+      if(!Array.isArray(fieldValue)){
+        return errorResponse(res, rule, field, fieldValue);
+      }
       data[split[0]][split[1]][split[2]].includes(condition_value) ? successResponse(res, rule, field, fieldValue) : errorResponse(res, rule, field, fieldValue);
     };
   }

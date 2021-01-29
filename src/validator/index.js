@@ -18,6 +18,10 @@ const validateInput = (req, res, next) => {
     return errMsg(res, "field is required.")
   };
 
+  if(typeof(rule.field) !== 'string'){
+    return errMsg(res, "field should be a string");
+  }
+
   if(rule.field.split('.').length > 3){
     return errMsg(res, "field should not be more than two nesting levels.")
   }
@@ -57,7 +61,12 @@ const validateInput = (req, res, next) => {
   const isArray = Array.isArray(data);
 
   //if it is an Array and rule.field isn't included in the array
-  if(isObject && isArray && !data.includes(rule.field)){
+  // if(isObject && isArray && !data.includes(rule.field)){
+  //   return errMsg(res, `field ${rule.field} is missing from data.`)
+  // };
+
+  //if data is an Array
+  if(isObject && isArray){
     return errMsg(res, `field ${rule.field} is missing from data.`)
   };
 
