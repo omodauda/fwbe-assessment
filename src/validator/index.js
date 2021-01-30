@@ -60,11 +60,6 @@ const validateInput = (req, res, next) => {
   //check if data object is a plain object or an Array
   const isArray = Array.isArray(data);
 
-  //if it is an Array and rule.field isn't included in the array
-  // if(isObject && isArray && !data.includes(rule.field)){
-  //   return errMsg(res, `field ${rule.field} is missing from data.`)
-  // };
-
   //if data is an Array
   if(isObject && isArray){
     return errMsg(res, `field ${rule.field} is missing from data.`)
@@ -83,19 +78,15 @@ const validateInput = (req, res, next) => {
     let checkArray = [];
     for(let i=1; i< rule.field.split('.').length; i++){
       const next = (rule.field.split('.')[i]);
-      // console.log('next', next)
+      
       const check = rule.field.split('.')[i-1];
-      checkArray.push(check)
-      // console.log('check', check);
-      // console.log(checkArray);
+      checkArray.push(check);
       
       if(checkArray.length === 1 && !Object.keys(data[checkArray[0]]).includes(next)){
-        // console.log(checkArray[0]);
         return errMsg(res, `field ${next} is missing from data.`)
       };
 
       if(checkArray.length === 2 && !Object.keys(data[checkArray[0]][checkArray[1]]).includes(next)){
-        // console.log(checkArray[1]);
         return errMsg(res, `field ${next} is missing from data.`)
       };
     }
